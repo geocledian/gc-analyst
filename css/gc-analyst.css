@@ -1,0 +1,99 @@
+/*
+ Geocledian field analyst css
+ 
+  main css - imports all dependent css definitions
+
+ created:     2019-04-30, jsommer
+ last update: 2020-04-30, jsommer
+ version: 0.1
+*/
+
+@import '../../gc-map/css/gc-map.css';
+@import '../../gc-chart/css/gc-chart.css';
+@import '../../gc-filter/css/gc-filter.css';
+@import '../../gc-cropstatus/css/gc-cropstatus.css';
+@import '../../gc-parceldata/css/gc-parceldata.css';
+@import '../../gc-timeslider/css/gc-timeslider.css';
+
+/* navigation bar */
+.navbar > div {
+    color: #EF7D00 !important;
+}
+.navbar > div > a {
+    color: #EF7D00 !important;
+    text-decoration: none !important;
+}
+.navbar-title {
+    padding: 1.5em;
+    font-weight: bold;
+}
+.navbar-start > a {
+    color: #EF7D00 !important;
+    text-decoration: none !important;
+}
+
+/* tabs */
+
+.tabs li.is-active a {
+    border-bottom-color: #EF7D00;
+    color: #EF7D00;
+}
+
+.button.is-dark.is-active {
+    background-color: #EF7D00;
+    border-color: transparent;
+    color: #F0F0F0!important;
+}
+.button.is-dark.is-active > svg {
+    color: #F0F0F0!important;
+}
+.button.is-light.is-active {
+    background-color: #EF7D00;
+    border-color: transparent;
+    color: #F0F0F0!important;
+}
+.button.is-light.is-active > svg {
+    color: #F0F0F0!important;
+}
+/* footer */
+
+#footer {
+    margin-top: 20px;
+}
+
+#footer a {
+    color: #EF7D00 !important;
+    text-decoration: none !important;
+}
+
+/* split.js config */
+.gutter {
+    /* background-color: #eee; */
+    background-repeat: no-repeat;
+    background-position: 50%;
+    margin-top: 170px;
+    margin-bottom: 170px;
+}
+
+.gutter.gutter-vertical {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+    cursor: row-resize;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+}
+.outer-split-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.split {
+    width:100%;
+    height:100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
