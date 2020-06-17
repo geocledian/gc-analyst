@@ -4,7 +4,7 @@
  init script
  
  created:     2019-11-04, jsommer
- last update: 2020-06-16, jsommer
+ last update: 2020-06-17, jsommer
  version: 0.9
 */
 
@@ -34,9 +34,6 @@ const libs = ['https://unpkg.com/vue@2.6.11/dist/vue.min.js',
               '../gc-chart/js/c3.min.js', // v0.7.11
               '../gc-map/js/gc-map.js',
               '../gc-chart/js/gc-chart.js',
-              '../gc-filter/js/gc-filter.js',
-              '../gc-list/js/gc-list.js',
-              '../gc-cropstatus/js/gc-cropstatus.js',
               '../gc-parceldata/js/gc-parceldata.js',
               '../gc-timeslider/js/gc-timeslider.js',
             ];
@@ -139,14 +136,15 @@ function initComponent() {
         visibleParcelIds: [], //updated from map!
         selectedProduct: "ndvi", //default preselected product is ndvi
         queryDate: "", //new Date().simpleDate(),
-        dataSource: "sentinel2",
+        dataSource: "", // "" : all, "sentinel2", "landsat8"
         filterString: "",
         limit: 250,
         offset: 0,
-        language: "en",
+        language: "de",
         cropstatusCollapsed: true, //unused currently
         currentTimeseries: [],
-        chartMode: "many-indices"
+        chartMode: "one-index", // start with "one-index" mode or "many-indices" mode
+        proxy: undefined //"farmchamps.de/proxy" // undefined or "yourdomain.de/proxy" //adjust proxy here without http:// or https://
       },
       i18n: i18n,
       created() {
@@ -306,12 +304,12 @@ function initComponent() {
           return "https://geocledian.com/agclient/analyst/?key="+apiKey + "&host=" +host;
         },
         setLocaleForIndexPage() {
-          document.getElementById("navbarProductOverview").innerHTML = i18n.t("indexLocales.navbar.productOverview")
-          document.getElementById("navbarAboutUs").innerHTML = i18n.t("indexLocales.navbar.about");
-          document.getElementById("allRightsReserved").innerHTML = i18n.t("indexLocales.footer.allRightsReserved");
-          //document.getElementById("menuMap").innerHTML = i18n.t("indexLocales.headings.map");
-          //document.getElementById("menuChart").innerHTML = i18n.t("indexLocales.headings.graph");
-          //document.getElementById("menuList").innerHTML = i18n.t("indexLocales.headings.list");
+          document.getElementById("navbarProductOverview").innerHTML = this.$t("indexLocales.navbar.productOverview")
+          document.getElementById("navbarAboutUs").innerHTML = this.$t("indexLocales.navbar.about");
+          document.getElementById("allRightsReserved").innerHTML = this.$t("indexLocales.footer.allRightsReserved");
+          //document.getElementById("menuMap").innerHTML = this.$t("indexLocales.headings.map");
+          //document.getElementById("menuChart").innerHTML = this.$t("indexLocales.headings.graph");
+          //document.getElementById("menuList").innerHTML = this.$t("indexLocales.headings.list");
         }
       }
     });

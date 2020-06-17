@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta charset="utf-8">
   
-  <title>Field Analysis</title>
+  <title>Detailansicht - Feldanalyse</title>
   
   <link href="css/gc-analyst.css" rel="stylesheet">
 
@@ -17,30 +17,15 @@
     }
     .gc-map {
       /* height: 405px !important; */
-      height: 365px !important;
-
+      height: 375px !important;
       /* small variant */
       /* height: 270px !important; */
     }
     .gc-chart {
       width: 100% !important;
-      /* height: 420px !important; */
       height: 380px !important;
       /* small variant */
       /* height: 250px !important; */
-    }
-    .gc-cropstatus {
-      /* height: 200px !important; */
-      /* width: 165px !important;
-      max-height: 140px !important; */
-    }
-    .gc-cropstatus-chart-gauge {
-      height: 9em;
-      width: 14em;
-    }
-    .gc-cropstatus-chart-pie {
-      height: 10em;
-      width: 10em;
     }
     /* override margin for better alignment with chart */
     .gc-api-message[gc-map] {
@@ -55,7 +40,6 @@
 
   <nav class="navbar is-light has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand" >
-      <!--span class="navbar-title">Demo client for ag|knowledge</span -->
       <a class="navbar-item" href="https://www.geocledian.com">
         <img src="img/logo.png" alt="geo|cledian - logo">
       </a>
@@ -79,170 +63,56 @@
 
   <section id="gc-app" class="section" style="padding-top: 1em; padding-bottom: 0em;">
     <div class="level" style="margin-bottom: 0.25em; margin-left: 0.25em;">
-        <!-- <div style="margin-top: 10px; margin-bottom: 10px;">
-          <img src="img/icons8-satellite-filled-100.png" width="22px" height="22px">
-          <span class="title is-4 is-orange"> Data source </span>
-          <div style="margin-top: 10px;">
-            <input id="rdLandsat" type="radio" class="is-small is-checkradio is-orange" name="source" value="landsat8" 
-                    v-model="$root.dataSource">
-            <label for="rdLandsat" class="is-orange is-small">Landsat</label>
-            <input id="rdSentinel" type="radio" class="is-small is-checkradio is-orange" name="source" value="sentinel2" 
-                    v-model="$root.dataSource">
-            <label for="rdSentinel" class="is-orange is-small">Sentinel</label>
-            <input id="rdAll" type="radio" class="is-small is-checkradio is-orange" name="source" value="" 
-                    v-model="$root.dataSource">
-            <label for="rdAll" class="is-orange is-small">All</label>
-          </div>
-        </div> -->
         <div class="" style="padding-bottom: 0em;">
-        <!-- <p class="menu-label">
-          Search data
-        </p> -->
-        <!-- <gc-filter
-          gc-widget-id="filter1"
-          :gc-apikey="$root.gcApikey" 
-          :gc-host="$root.gcHost"
-          :gc-limit="$root.limit"
-          :gc-offset="$root.offset"
-          gc-layout="horizontal"
-          :gc-language="$root.language">
-        </gc-filter>   -->
 
         <gc-parceldata 
           gc-widget-id="parceldata1"
-          :gc-apikey="$root.gcApikey" 
-          :gc-host="$root.gcHost"
+          :gc-proxy="$root.proxy"
           :gc-selected-parcel-id="$root.selectedParcelId"
           :gc-language="$root.language"
           gc-available-fields="parcelId,name,crop,entity,planting,harvest,area,promotion"
           gc-layout="horizontal">
         </gc-parceldata>  
         </div>
-        <!-- <div class="container" style="padding: 1em; margin-left: 2em; margin-right: 1em; padding-bottom: 0em;"> -->
-        <!-- <p class="gc-options-title is-size-6 is-orange" style="cursor: pointer; margin-bottom: 0.5em;" 
-                v-on:click="cropstatusCollapsed=!cropstatusCollapsed">
-                Crop status
-                <i :class="[cropstatusCollapsed ? '': 'is-active', 'fas', 'fa-angle-down', 'fa-sm']"></i>
-        </p> -->
-        <!-- <div class="is-flex" v-if="cropstatusCollapsed"> -->
-          <!-- <gc-cropstatus
-          gc-widget-id="cropstatus2" 
-          :gc-apikey="$root.gcApikey" 
-          :gc-host="$root.gcHost"
-          :gc-parcel-id="$root.selectedParcelId"
-          :gc-selected-date="$root.queryDate"
-          gc-available-options=""
-          gc-mode="pie"></gc-cropstatus> -->
-
-          <div class="" style="padding-bottom: 0em;">
-            <div class="is-flex" style="padding-bottom: 0em;">
-
-              <gc-cropstatus
-                gc-widget-id="cropstatus1" 
-                :gc-apikey="$root.gcApikey" 
-                :gc-host="$root.gcHost"
-                :gc-parcel-id="$root.selectedParcelId"
-                :gc-selected-date="$root.queryDate"
-                gc-available-options="legend"
-                :gc-language="$root.language"
-                gc-legend-position="bottom"
-                gc-mode="gauge"></gc-cropstatus>
-
-              <gc-cropstatus
-                gc-widget-id="cropstatus2" 
-                :gc-apikey="$root.gcApikey" 
-                :gc-host="$root.gcHost"
-                :gc-parcel-id="$root.selectedParcelId"
-                :gc-selected-date="$root.queryDate"
-                gc-available-options=""
-                :gc-language="$root.language"
-                gc-legend-position="bottom"
-                gc-mode="pie"></gc-cropstatus>
-            </div>
-             
-          </div>
-
-        <!-- </div> -->
-        <!-- </div> -->
     </div>
-    <!-- <hr> -->
 
     <div class="tabs is-left" >
       <ul>
         <li class="is-active">
           <a onclick="activateSplitView();">
             <span class="icon is-small is-orange"><i class="fas fa-columns fa-lg"></i></span>
-            <span class="is-orange is-hidden-mobile"> Split View </span>
+            <span class="is-orange is-hidden-mobile"> {{ $t("indexLocales.tabs.splitview") }} </span>
           </a>
         </li>
         <li class="">
           <a onclick="leftColumnFull();">
             <span class="icon is-small is-orange"><i class="fas fa-chart-line fa-lg"></i></span>
-            <span class="is-orange is-hidden-mobile"> Graph </span>
+            <span class="is-orange is-hidden-mobile"> {{ $t("indexLocales.tabs.graph") }} </span>
           </a>
         </li>
         <li class="">
             <a onclick="rightColumnFull();">
               <span class="icon is-small is-orange"><i class="fas fa-map fa-lg"></i></span>
-              <span class="is-orange is-hidden-mobile"> Map</span>
+              <span class="is-orange is-hidden-mobile"> {{ $t("indexLocales.tabs.map") }}</span>
             </a>
           </li>
-        <li class="is-hidden">
-          <a onclick=";">
-            <span class="icon is-small is-orange"><i class="fas fa-flask fa-lg"></i></span>
-            <span class="is-orange is-hidden-mobile"> Analysis</span>
-          </a>
-        </li>
        </ul>
-  </div>
+    </div>
 
-    <!-- <div class="level" style="margin-left: 0.25em; padding: 0;"> -->
-
-      <!-- <div class="" style="margin-top: 10px; margin-bottom: 10px;">
-        <img src="img/icons8-satellite-filled-100.png" width="22px" height="22px">
-        <span class="title is-4 is-orange"> Data source </span>
-        <div style="margin-top: 10px;">
-          <input id="rdLandsat" type="radio" class="is-small is-checkradio is-orange" name="source" value="landsat8" 
-                  v-model="$root.dataSource">
-          <label for="rdLandsat" class="is-orange is-small">Landsat</label>
-          <input id="rdSentinel" type="radio" class="is-small is-checkradio is-orange" name="source" value="sentinel2" 
-                  v-model="$root.dataSource">
-          <label for="rdSentinel" class="is-orange is-small">Sentinel</label>
-          <input id="rdAll" type="radio" class="is-small is-checkradio is-orange" name="source" value="" 
-                  v-model="$root.dataSource">
-          <label for="rdAll" class="is-orange is-small">All</label>
-        </div>
-      </div> -->
-
-    <!-- </div> -->
-    
     <div class="outer-split-container" style="padding-bottom: 0em;">
 
       <div id="leftColumn" class="split" style="padding-bottom: 0em; margin-right: 1.5em; margin-bottom: -3em;">
-        <!-- <p class="menu-label">
-          Graph
-        </p> -->
-          <!-- mode selector 
-          <div class="field">
-            <div class="field field-label is-small"><label class="label has-text-left is-grey">{{ $t('indexLocales.mode.label')}}</label></div>
-            <div class="select is-small">
-              <select v-model="chartMode">
-                <option value="one-index">{{ $t('indexLocales.mode.one_index')}}</option>
-                <option value="many-indices">{{ $t('indexLocales.mode.many_indices')}}</option>
-              </select>
-            </div>
-          </div> mode selector -->
 
         <gc-chart 
             gc-widget-id="chart1" 
-            :gc-apikey="$root.gcApikey" 
-            :gc-host="$root.gcHost"
+            :gc-proxy="$root.proxy"
             :gc-selected-date="$root.queryDate"
             :gc-selected-product="$root.selectedProduct"
             :gc-current-parcel-id="$root.selectedParcelId" 
             :gc-mode="$root.chartMode"
-            gc-available-options="optionsTitle,graphType,hideGraphs,dateZoom,legend,modeSelector"
-            gc-available-products="vitality,ndvi,ndwi,ndre2,cire"
+            gc-available-options="optionsTitle,graphType,dateZoom"
+            gc-available-stats="mean,std.dev."
+            gc-available-products="vitality,ndvi,ndwi,cire"
             :gc-data-source="$root.dataSource"
             gc-datezoom-layout="horizontal"
             :gc-language="$root.language"
@@ -250,16 +120,14 @@
       </div>
     
       <div id="rightColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; ">
-        <!-- <p class="menu-label">
-          Map
-        </p> -->
         <gc-map 
-           gc-widget-id="map1" 
-           :gc-apikey="$root.gcApikey" 
-           :gc-host="$root.gcHost"
+           gc-widget-id="map1"
+           :gc-proxy="$root.proxy" 
             gc-basemap="osm"
-            gc-available-tools="edit,delete,query,legend,downloadImage,productSelector" 
-            gc-available-options="optionsTitle,colorMap,imageBrightness,imageTransparency" 
+            gc-available-tools="legend,productSelector" 
+            gc-available-options="nologo" 
+            gc-legend-position="bottomleft"
+            gc-available-products="vitality,visible,variations,ndvi,ndwi,cire"
             :gc-selected-product="$root.selectedProduct"
             :gc-current-parcel-id="$root.selectedParcelId" 
             :gc-filter-string="$root.filterString"
@@ -271,6 +139,7 @@
       </div>
 
     </div> <!-- columns -->
+
     <div class="level" style="margin-left: 10em; padding: 0; margin-right: 10em;">
       <gc-timeslider
         gc-widget-id="timeslider1" 
@@ -278,8 +147,7 @@
         :gc-selected-date="$root.queryDate"
         gc-image-change-interval="1200"
         :gc-language="$root.language"
-        style="width: 100%"
-        >
+        style="width: 100%">
       </gc-timeslider>
     </div>  
 
@@ -307,6 +175,11 @@
         "map": "Map",
         "filter": "Search"
       },
+      "tabs" : {
+        "splitview" : "Split View",
+        "graph" : "Graph",
+        "map" : "Map",
+      },
       "footer": {
         "allRightsReserved" : "All rights reserved",
       },
@@ -326,6 +199,11 @@
         "list": "Daten",
         "map": "Karte",
         "filter": "Suche"
+      },
+      "tabs" : {
+        "splitview" : "Geteilte Ansicht",
+        "graph" : "Graph",
+        "map" : "Karte",
       },
       "footer": {
         "allRightsReserved" : "Alle Rechte vorbehalten",
