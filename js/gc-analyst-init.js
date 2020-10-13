@@ -39,6 +39,7 @@ const libs = ['https://unpkg.com/vue@2.6.11/dist/vue.min.js',
               '../gc-cropstatus/js/gc-cropstatus.js',
               '../gc-parceldata/js/gc-parceldata.js',
               '../gc-timeslider/js/gc-timeslider.js',
+              'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'
             ];
 
 function gcGetBaseURL() {
@@ -139,14 +140,15 @@ function initComponent() {
         visibleParcelIds: [], //updated from map!
         selectedProduct: "ndvi", //default preselected product is ndvi
         queryDate: "", //new Date().simpleDate(),
-        dataSource: "sentinel2",
+        dataSource: "vhr",
         filterString: "",
         limit: 250,
         offset: 0,
         language: "en",
         cropstatusCollapsed: true, //unused currently
         currentTimeseries: [],
-        chartMode: "many-indices"
+        chartMode: "many-indices",
+        apiBaseUrl: "/agknow/malta/api/v3",
       },
       i18n: i18n,
       created() {
