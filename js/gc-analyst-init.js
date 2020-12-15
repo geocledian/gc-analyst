@@ -4,8 +4,8 @@
  init script
  
  created:     2019-11-04, jsommer
- last update: 2020-06-17, jsommer
- version: 0.9
+ last update: 2020-12-15, jsommer
+ version: 0.9.1
 */
 
 // root Vue instance
