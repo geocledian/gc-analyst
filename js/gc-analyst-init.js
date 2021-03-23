@@ -29,6 +29,7 @@ const libs = ['https://unpkg.com/vue@2.6.11/dist/vue.min.js',
               'https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js',
               'https://unpkg.com/vis-timeline@7.1.2/standalone/umd/vis-timeline-graph2d.min.js',
               'https://unpkg.com/split.js@1.5.11/dist/split.min.js',
+              'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js',
               '../gc-chart/css/bulma-ext/bulma-calendar.min.js',
               '../gc-chart/js/d3.v3.min.js', // v4.13.0 
               '../gc-chart/js/c3.min.js', // v0.7.11
