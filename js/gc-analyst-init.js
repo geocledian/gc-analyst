@@ -3,8 +3,8 @@
  
  init script
  
- created:     2019-11-04, jsommer
- last update: 2020-12-15, jsommer
+ created: 2019-11-04, jsommer
+ updated: 2021-04-13, jsommer
  version: 0.9.1
 */
 
@@ -228,6 +228,11 @@ function initComponent() {
             let parcel_id = parseInt(this.getQueryVariable(window.location.search.substring(1), "parcel_id"));
             console.debug("root - gcParcelId: "+parcel_id);
             return parcel_id;
+          }
+        },
+        gcApiBaseUrl: {
+          get() {
+            return "/agknow/api/v4"
           }
         }
       },

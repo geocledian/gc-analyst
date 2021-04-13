@@ -111,6 +111,7 @@
         <gc-parceldata 
           gc-widget-id="parceldata1"
           :gc-apikey="$root.gcApikey" 
+          :gc-api-base-url="$root.gcApiBaseUrl" 
           :gc-host="$root.gcHost"
           :gc-selected-parcel-id="$root.selectedParcelId"
           :gc-language="$root.language"
@@ -137,6 +138,7 @@
           <div class="" style="padding-bottom: 0em;">
             <div class="is-flex" style="padding-bottom: 0em;">
 
+              <!-- crop status still against API v3 -->
               <gc-cropstatus
                 gc-widget-id="cropstatus1" 
                 :gc-apikey="$root.gcApikey" 
@@ -151,7 +153,7 @@
 
               <gc-cropstatus
                 gc-widget-id="cropstatus2" 
-                :gc-apikey="$root.gcApikey" 
+                :gc-apikey="$root.gcApikey"
                 :gc-host="$root.gcHost"
                 :gc-parcel-id="$root.selectedParcelId"
                 :gc-selected-date="$root.queryDate"
@@ -238,6 +240,7 @@
         <gc-chart 
             gc-widget-id="chart1" 
             :gc-apikey="$root.gcApikey" 
+            :gc-api-base-url="$root.gcApiBaseUrl" 
             :gc-host="$root.gcHost"
             :gc-selected-date="$root.queryDate"
             :gc-selected-product="$root.selectedProduct"
@@ -258,6 +261,7 @@
         <gc-map 
            gc-widget-id="map1" 
            :gc-apikey="$root.gcApikey" 
+           :gc-api-base-url="$root.gcApiBaseUrl" 
            :gc-host="$root.gcHost"
             gc-basemap="osm"
             gc-available-tools="edit,delete,query,legend,downloadImage,productSelector" 
