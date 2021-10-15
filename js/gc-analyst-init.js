@@ -4,13 +4,12 @@
  init script
  
  created: 2019-11-04, jsommer
- updated: 2021-04-13, jsommer
- version: 0.9.1
+ updated: 2021-10-15, jsommer
+ version: 0.9.3
 */
 
 // root Vue instance
 var vmRoot;
-var split;
 
 // global gc locale object
 // every component may append its data to this
@@ -20,26 +19,31 @@ var gcLocales = { en: {}, de: {} };
 var i18n;
 
 // init dependent javascript libs
-const libs = ['https://unpkg.com/vue@2.6.11/dist/vue.min.js',
+const libs = ['https://unpkg.com/vue@2.6.14/dist/vue.min.js',
               'https://unpkg.com/vue-i18n@8.17.5/dist/vue-i18n.js',
               //'https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_API_KEY_FROM_GOOGLE',
-              'https://unpkg.com/leaflet@1.3.4/dist/leaflet.js',
-              'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js',
+              'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js',
+              'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js',              
               //'https://unpkg.com/leaflet.gridlayer.googlemutant@0.11.2/dist/Leaflet.GoogleMutant.js',
               'https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js',
               'https://unpkg.com/vis-timeline@7.1.2/standalone/umd/vis-timeline-graph2d.min.js',
-              'https://unpkg.com/split.js@1.5.11/dist/split.min.js',
+              'https://unpkg.com/split.js@1.6.0/dist/split.min.js',
               'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js',
               '../gc-chart/css/bulma-ext/bulma-calendar.min.js',
-              '../gc-chart/js/d3.v3.min.js', // v4.13.0 
-              '../gc-chart/js/c3.min.js', // v0.7.11
+              // '../gc-chart/js/d3.v3.min.js', // v4.13.0 
+              // '../gc-chart/js/c3.min.js', // v0.7.11
+              '../gc-chart/js/d3.v6.min.js', // v6.7.0
+              '../gc-chart/js/billboard.min.js', // v3.1.5
               '../gc-map/js/gc-map.js',
               '../gc-chart/js/gc-chart.js',
               '../gc-filter/js/gc-filter.js',
-              '../gc-list/js/gc-list.js',
-              '../gc-cropstatus/js/gc-cropstatus.js',
               '../gc-parceldata/js/gc-parceldata.js',
               '../gc-timeslider/js/gc-timeslider.js',
+              '../gc-datasource/js/gc-datasource.js',
+              '../gc-messages/js/gc-messages.js',
+              '../gc-phenology-control/js/gc-phenology-control.js',
+              '../gc-cropstatus/js/gc-cropstatus.js'
+
             ];
 
 function gcGetBaseURL() {
@@ -140,14 +144,27 @@ function initComponent() {
         visibleParcelIds: [], //updated from map!
         selectedProduct: "ndvi", //default preselected product is ndvi
         queryDate: "", //new Date().simpleDate(),
-        dataSource: "sentinel2",
+        dataSource: "",
         filterString: "",
         limit: 250,
         offset: 0,
         language: "en",
-        cropstatusCollapsed: true, //unused currently
+        // cropstatusCollapsed: true, //unused currently
         currentTimeseries: [],
-        chartMode: "many-indices"
+        chartMode: "one-index", //"many-indices"
+        // full chart zoom or full map zoom
+        chartActive: false,
+        mapActive: false,
+        // visibility of tab components
+        analyticsActive: true,
+        messagesActive: true,
+        timesliderActive: true,
+        containerSplitSize: [62,38], //percentage of golden ratio
+        leftColumnShow: true,
+        rightColumnShow: true,
+        split: null,
+        phStartdate: '',
+        phEnddate: ''
       },
       i18n: i18n,
       created() {
@@ -161,17 +178,20 @@ function initComponent() {
         console.debug("root mounted!");
 
         // splitter functionality for dynamic resize between chart & map
-        split = Split(['#leftColumn', '#rightColumn'], {
-            sizes: [60,40], //percentage 60% 40%
+        this.split = Split(['#leftColumn', '#rightColumn'], {
+            sizes: this.containerSplitSize, 
             gutterSize: 6,
             dragInterval: 6,
             cursor: 'col-resize',
-            minSize: [0,0],
-            //minSize: [300,300],
-            onDrag: function(sizes) {
-              // emit container size changes - chart component may listen on this event
-              this.$root.$emit("containerSizeChange", sizes);
-            }.bind(this)
+            minSize: 0,
+            onDrag: function() {
+              // onDrag does not have current size
+              this.$root.$emit("containerSizeChange", undefined);
+            }.bind(this),
+            // onDragEnd: function(sizes) {
+            //   // onDrag does not have current size
+            //   this.$root.$emit("containerSizeChange", sizes);
+            // }.bind(this),
         });
     
         //set up listener for changes from child components
@@ -186,17 +206,24 @@ function initComponent() {
         this.$on('dataSourceChange', this.dataSourceChange);
         this.$on('timeseriesChange', this.timeseriesChange);
         this.$on('chartModeChange', this.chartModeChange);
+        this.$on('phStartdateChange', this.phStartdateChange);
+        this.$on('phEnddateChange', this.phEnddateChange);
+        this.$on('getPhenology', this.getPhenology);
+        this.$on('resetPhenology', this.resetPhenology);
+
+        //trigger apply filter
+        // for (var i=0; i < this.$children.length; i++ ) {
+        //   if (this.$children[i].gcWidgetId.includes("filter")) {
+        //     this.$children[i].applyFilter();
+        //   } 
+        // }
       },
       watch: {
         parcels: function(newValue, oldValue) {
           console.debug("root parcels changed!");
-          //console.debug(oldValue);
-          //console.debug(newValue);
         },
         filterString: function(newValue, oldValue) {
           console.debug("root filterString changed!");
-          //console.debug(oldValue);
-          //console.debug(newValue);
         },
         language (newValue, oldValue) {
           i18n.locale = newValue;
@@ -208,6 +235,14 @@ function initComponent() {
         },
         currentTimeseries (newValue, oldValue) {
           console.debug("root timeseries changed!");
+        },
+        containerSplitSize (newValue, oldValue) {
+          console.debug("root containerSplitSize changed!");
+          
+          this.split.setSizes(newValue);
+
+          // delegate container size change event
+          this.$root.$emit("containerSizeChange", newValue);
         }
       },
       computed: {
@@ -287,6 +322,23 @@ function initComponent() {
         chartModeChange: function (value) {
           this.chartMode = value;
         },
+        getPhenology: function () {
+          for (let i=0; i < this.$children.length; i++ ) {
+            if (this.$children[i].gcWidgetId.includes("chart")) {
+              this.$children[i].getPhenology();
+            }
+          }
+        },
+        resetPhenology: function () {
+          for (let i=0; i < this.$children.length; i++ ) {
+            if (this.$children[i].gcWidgetId.includes("chart")) {
+              this.$children[i].phenology = [];
+              this.$children[i].sos = [];
+              this.$children[i].pos = [];
+              this.$children[i].eos = [];
+            }
+          }
+        },
         //https://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
         getQueryVariable: function (query, variable) {
           var vars = query.split('&');
@@ -314,10 +366,18 @@ function initComponent() {
         setLocaleForIndexPage() {
           document.getElementById("navbarProductOverview").innerHTML = i18n.t("indexLocales.navbar.productOverview")
           document.getElementById("navbarAboutUs").innerHTML = i18n.t("indexLocales.navbar.about");
+          document.getElementById("navbarCropPerformance").innerHTML = i18n.t("indexLocales.navbar.cropPerformance");
+          document.getElementById("navbarDataValidation").innerHTML = i18n.t("indexLocales.navbar.validation");
+          document.getElementById("navbarPortfolio").innerHTML = i18n.t("indexLocales.navbar.portfolio");
+          document.getElementById("navbarZones").innerHTML = i18n.t("indexLocales.navbar.zones");
           document.getElementById("allRightsReserved").innerHTML = i18n.t("indexLocales.footer.allRightsReserved");
-          //document.getElementById("menuMap").innerHTML = i18n.t("indexLocales.headings.map");
-          //document.getElementById("menuChart").innerHTML = i18n.t("indexLocales.headings.graph");
-          //document.getElementById("menuList").innerHTML = i18n.t("indexLocales.headings.list");
+          document.getElementById("tabSplitView").innerHTML = i18n.t("indexLocales.headings.splitview");
+          document.getElementById("tabGraph").innerHTML = i18n.t("indexLocales.headings.graph");
+          document.getElementById("tabMap").innerHTML = i18n.t("indexLocales.headings.map");
+          document.getElementById("menuUtilities").innerHTML = i18n.t("indexLocales.headings.utilities");
+          document.getElementById("menuSearch").innerHTML = i18n.t("indexLocales.headings.filter");
+          document.getElementById("menuDetails").innerHTML = i18n.t("indexLocales.headings.details");
+          document.getElementById("menuAnalytics").innerHTML = i18n.t("indexLocales.headings.analytics");
         }
       }
     });
