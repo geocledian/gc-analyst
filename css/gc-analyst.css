@@ -4,14 +4,13 @@
   main css - imports all dependent css definitions
 
  created:     2019-04-30, jsommer
- last update: 2020-09-27, jsommer
- version:     0.9.2
+ last update: 2021-11-22, jsommer
+ version:     0.9.3
 */
 
 @import '../../gc-map/css/gc-map.css';
 @import '../../gc-chart/css/gc-chart.css';
 @import '../../gc-filter/css/gc-filter.css';
-@import '../../gc-cropstatus/css/gc-cropstatus.css';
 @import '../../gc-parceldata/css/gc-parceldata.css';
 @import '../../gc-timeslider/css/gc-timeslider.css';
 @import '../../gc-phenology-control/css/gc-phenology-control.css';
@@ -40,22 +39,7 @@
     color: #EF7D00;
 }
 
-.button.is-dark.is-active {
-    background-color: #EF7D00;
-    border-color: transparent;
-    color: #F0F0F0!important;
-}
-.button.is-dark.is-active > svg {
-    color: #F0F0F0!important;
-}
-.button.is-light.is-active {
-    background-color: #EF7D00;
-    border-color: transparent;
-    color: #F0F0F0!important;
-}
-.button.is-light.is-active > svg {
-    color: #F0F0F0!important;
-}
+
 /* footer */
 
 #footer {
