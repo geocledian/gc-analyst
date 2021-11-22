@@ -29,21 +29,17 @@ const libs = ['https://unpkg.com/vue@2.6.14/dist/vue.min.js',
               'https://unpkg.com/vis-timeline@7.1.2/standalone/umd/vis-timeline-graph2d.min.js',
               'https://unpkg.com/split.js@1.6.0/dist/split.min.js',
               'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js',
-              '../gc-chart/css/bulma-ext/bulma-calendar.min.js',
-              // '../gc-chart/js/d3.v3.min.js', // v4.13.0 
-              // '../gc-chart/js/c3.min.js', // v0.7.11
+              '../gc-styles/bulma/0.6.2/bulma-ext/bulma-calendar/v1/bulma-calendar.min.js',
               '../gc-chart/js/d3.v6.min.js', // v6.7.0
               '../gc-chart/js/billboard.min.js', // v3.1.5
-              '../gc-map/js/gc-map.js',
-              '../gc-chart/js/gc-chart.js',
-              '../gc-filter/js/gc-filter.js',
-              '../gc-parceldata/js/gc-parceldata.js',
-              '../gc-timeslider/js/gc-timeslider.js',
-              '../gc-datasource/js/gc-datasource.js',
-              '../gc-messages/js/gc-messages.js',
-              '../gc-phenology-control/js/gc-phenology-control.js',
-              '../gc-cropstatus/js/gc-cropstatus.js'
-
+              '../gc-map/js/gc-map.min.js',
+              '../gc-chart/js/gc-chart.min.js',
+              '../gc-filter/js/gc-filter.min.js',
+              '../gc-parceldata/js/gc-parceldata.min.js',
+              '../gc-timeslider/js/gc-timeslider.min.js',
+              '../gc-datasource/js/gc-datasource.min.js',
+              '../gc-messages/js/gc-messages.min.js',
+              '../gc-phenology-control/js/gc-phenology-control.min.js',
             ];
 
 function gcGetBaseURL() {
@@ -159,7 +155,7 @@ function initComponent() {
         analyticsActive: true,
         messagesActive: true,
         timesliderActive: true,
-        containerSplitSize: [62,38], //percentage of golden ratio
+        containerSplitSize: [65,35],
         leftColumnShow: true,
         rightColumnShow: true,
         split: null,
@@ -210,6 +206,8 @@ function initComponent() {
         this.$on('phEnddateChange', this.phEnddateChange);
         this.$on('getPhenology', this.getPhenology);
         this.$on('resetPhenology', this.resetPhenology);
+
+        this.containerSplitSize = [65,35];
 
         //trigger apply filter
         // for (var i=0; i < this.$children.length; i++ ) {
