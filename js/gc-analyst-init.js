@@ -4,8 +4,8 @@
  init script
  
  created: 2019-11-04, jsommer
- updated: 2021-10-15, jsommer
- version: 0.9.3
+ updated: 2021-11-22, jsommer
+ version: 0.9.4
 */
 
 // root Vue instance
@@ -210,11 +210,11 @@ function initComponent() {
         this.containerSplitSize = [65,35];
 
         //trigger apply filter
-        // for (var i=0; i < this.$children.length; i++ ) {
-        //   if (this.$children[i].gcWidgetId.includes("filter")) {
-        //     this.$children[i].applyFilter();
-        //   } 
-        // }
+        for (var i=0; i < this.$children.length; i++ ) {
+          if (this.$children[i].gcWidgetId.includes("filter")) {
+            this.$children[i].applyFilter();
+          } 
+        }
       },
       watch: {
         parcels: function(newValue, oldValue) {
