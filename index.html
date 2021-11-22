@@ -29,19 +29,6 @@
       /* small variant */
       /* height: 250px !important; */
     }
-    .gc-cropstatus {
-      /* height: 200px !important; */
-      /* width: 165px !important;
-      max-height: 140px !important; */
-    }
-    .gc-cropstatus-chart-gauge {
-      height: 9em;
-      width: 14em;
-    }
-    .gc-cropstatus-chart-pie {
-      height: 10em;
-      width: 10em;
-    }
     /* override margin for better alignment with chart */
     .gc-api-message[gc-map] {
         margin-top: 1.5em;
@@ -70,10 +57,10 @@
       <div class="navbar-start">
         <a id="navbarProductOverview" class="navbar-item" href="https://docs.geocledian.com/product-overview/" target="_blank"></a>
         <a id="navbarAboutUs" class="navbar-item" href="https://geocledian.com/page/aboutus/" target="_blank"></a>
-        <a id="navbarPortfolio" class="navbar-item" href="https://geocledian.com/agclient/portfolio" target="_blank"></a>
-        <a id="navbarCropPerformance" class="navbar-item is-disabled" href="https://geocledian.com/agclient/cropperf" target="_blank"></a>
-        <a id="navbarDataValidation" class="navbar-item is-disabled" href="https://geocledian.com/agclient/validation" target="_blank"></a>
-        <a id="navbarZones" class="navbar-item is-disabled" href="https://geocledian.com/agclient/zones" target="_blank"></a>
+        <a id="navbarPortfolio" class="navbar-item" href="../portfolio" target="_blank"></a>
+        <a id="navbarCropPerformance" class="navbar-item is-disabled" href="../crop-performance" target="_blank"></a>
+        <a id="navbarDataValidation" class="navbar-item is-disabled" href="../validation" target="_blank"></a>
+        <a id="navbarZones" class="navbar-item" href="../zones" target="_blank"></a>
         <a class="navbar-item is-pulled-right" onclick="vmRoot.$root.language = 'de'">DE</a>
         <a class="navbar-item is-pulled-right" onclick="vmRoot.$root.language = 'en'">EN</a>
       </div>
@@ -81,7 +68,7 @@
   </nav>
 
 
-  <section id="gc-app" class="section" style="padding-top: 1em; padding-bottom: 0em;">
+  <section id="gc-app" class="section" style="padding-top: 1em; padding-bottom: 0em; padding-left: 1.5rem; padding-right: 1.5rem!important;">
     <div class="columns" style="margin-bottom: 0em; margin-left: 0em; padding-right: 1.5em;">       
       <div class="column is-one-fifth" style="padding-bottom: 0em; max-width: 20em;">
 
@@ -121,24 +108,9 @@
             :gc-selected-parcel-id="$root.selectedParcelId" 
             :gc-startdate="$root.phStartdate"
             :gc-enddate="$root.phEnddate"
+            gc-available-options=""
           />
         </div>
-
-        <!-- <div >
-          <gc-cropstatus
-            gc-widget-id="cropstatus1" 
-            :gc-apikey="$root.gcApikey" 
-            :gc-api-base-url="$root.gcApiBaseUrl" 
-            :gc-host="$root.gcHost"
-            :gc-selected-date="$root.queryDate"
-            :gc-parcel-id="$root.selectedParcelId" 
-            gc-available-options="legend"
-            :gc-language="$root.language"
-            gc-legend-position="bottom"
-            :gc-white-label="true"
-            gc-mode="gauge"
-          />
-        </div> -->
 
         </div>
 
@@ -203,7 +175,7 @@
             <div class="outer-split-container">
         
               <!-- margin bottom because of tighter timeslider -->
-              <div id="leftColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; margin-bottom: -4em;" v-show="leftColumnShow">
+              <div id="leftColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; margin-right: 0.2em; margin-bottom: -4em;" v-show="leftColumnShow">
                 
                 <div>
                   <gc-chart 
@@ -231,7 +203,7 @@
 
               </div>
             
-              <div id="rightColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; " v-show="rightColumnShow">
+              <div id="rightColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; margin-left: 0.2em;" v-show="rightColumnShow">
                 <div>
                   <gc-map 
                       gc-widget-id="map1" 
