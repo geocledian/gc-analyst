@@ -4,7 +4,7 @@
  init script
  
  created: 2019-11-04, jsommer
- updated: 2021-11-22, jsommer
+ updated: 2021-11-25, jsommer
  version: 0.9.4
 */
 
@@ -21,14 +21,15 @@ var i18n;
 // init dependent javascript libs
 const libs = ['https://unpkg.com/vue@2.6.14/dist/vue.min.js',
               'https://unpkg.com/vue-i18n@8.17.5/dist/vue-i18n.js',
-              //'https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_API_KEY_FROM_GOOGLE',
-              'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js',
-              'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js',              
-              //'https://unpkg.com/leaflet.gridlayer.googlemutant@0.11.2/dist/Leaflet.GoogleMutant.js',
-              'https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js',
-              'https://unpkg.com/vis-timeline@7.1.2/standalone/umd/vis-timeline-graph2d.min.js',
               'https://unpkg.com/split.js@1.6.0/dist/split.min.js',
               'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js',
+              'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js',
+              'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js',              
+              // Google API Key - uncomment the following two lines and enter your valid API Key here
+              // 'https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_API_KEY_FROM_GOOGLE', 
+              // 'https://unpkg.com/leaflet.gridlayer.googlemutant@0.11.2/dist/Leaflet.GoogleMutant.js',
+              'https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js',
+              'https://unpkg.com/vis-timeline@7.1.2/standalone/umd/vis-timeline-graph2d.min.js',
               '../gc-styles/bulma/0.6.2/bulma-ext/bulma-calendar/v1/bulma-calendar.min.js',
               '../gc-chart/js/d3.v6.min.js', // v6.7.0
               '../gc-chart/js/billboard.min.js', // v3.1.5
@@ -368,6 +369,7 @@ function initComponent() {
           document.getElementById("navbarDataValidation").innerHTML = i18n.t("indexLocales.navbar.validation");
           document.getElementById("navbarPortfolio").innerHTML = i18n.t("indexLocales.navbar.portfolio");
           document.getElementById("navbarZones").innerHTML = i18n.t("indexLocales.navbar.zones");
+          document.getElementById("navbarHarvest").innerHTML = i18n.t("indexLocales.navbar.harvest");
           document.getElementById("allRightsReserved").innerHTML = i18n.t("indexLocales.footer.allRightsReserved");
           document.getElementById("tabSplitView").innerHTML = i18n.t("indexLocales.headings.splitview");
           document.getElementById("tabGraph").innerHTML = i18n.t("indexLocales.headings.graph");
