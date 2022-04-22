@@ -4,8 +4,8 @@
  init script
  
  created: 2019-11-04, jsommer
- updated: 2021-11-25, jsommer
- version: 0.9.4
+ updated: 2022-04-22, jsommer
+ version: 0.9.5
 */
 
 // root Vue instance
@@ -170,6 +170,8 @@ function initComponent() {
         i18n.locale = this.language;
         //i18n for index page
         this.setLocaleForIndexPage();
+        //adds the query parameters of the current app to the link of each other app 
+        this.addQueryParamsForNewApp();
       },
       mounted: function () {
         console.debug("root mounted!");
@@ -378,6 +380,18 @@ function initComponent() {
           document.getElementById("menuSearch").innerHTML = i18n.t("indexLocales.headings.filter");
           document.getElementById("menuDetails").innerHTML = i18n.t("indexLocales.headings.details");
           document.getElementById("menuAnalytics").innerHTML = i18n.t("indexLocales.headings.analytics");
+        },
+        addQueryParamsForNewApp() {
+          /* adds the query parameters of the current app to the link of each other app */
+          let queryParams = window.location.search.substring(1);
+          console.debug("QUERY PARAMS: " + queryParams);
+
+          document.getElementById("navbarCropPerformance").href += "?" + queryParams;
+          document.getElementById("navbarDataValidation").href += "?" + queryParams;
+          document.getElementById("navbarPortfolio").href += "?" + queryParams;
+          document.getElementById("navbarZones").href += "?" + queryParams;
+          document.getElementById("navbarHarvest").href += "?" + queryParams;
+
         }
       }
     });
