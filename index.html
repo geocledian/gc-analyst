@@ -4,9 +4,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta charset="utf-8">
-  
+
   <title>Field Analysis</title>
-  
+
   <link href="css/gc-analyst.css" rel="stylesheet">
 
   <style>
@@ -15,6 +15,7 @@
       line-height: 1.1em;
       font-size: 0.9rem;
     }
+
     .gc-map {
       /* height: 405px !important; */
       height: 380px !important;
@@ -22,6 +23,7 @@
       /* small variant */
       /* height: 270px !important; */
     }
+
     .gc-chart {
       width: 100% !important;
       /* height: 420px !important; */
@@ -29,11 +31,11 @@
       /* small variant */
       /* height: 250px !important; */
     }
+
     /* override margin for better alignment with chart */
     .gc-api-message[gc-map] {
-        margin-top: 1.5em;
+      margin-top: 1.5em;
     }
-    
   </style>
 
 </head>
@@ -41,7 +43,7 @@
 <body>
 
   <nav class="navbar is-light has-shadow" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand" >
+    <div class="navbar-brand">
       <!--span class="navbar-title">Demo client for ag|knowledge</span -->
       <a class="navbar-item" href="https://www.geocledian.com">
         <img src="img/logo.png" alt="geo|cledian - logo">
@@ -55,7 +57,8 @@
     </div>
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-start">
-        <a id="navbarProductOverview" class="navbar-item" href="https://docs.geocledian.com/product-overview/" target="_blank"></a>
+        <a id="navbarProductOverview" class="navbar-item" href="https://docs.geocledian.com/product-overview/"
+          target="_blank"></a>
         <a id="navbarAboutUs" class="navbar-item" href="https://geocledian.com/page/aboutus/" target="_blank"></a>
         <a id="navbarPortfolio" class="navbar-item" href="../portfolio"></a>
         <a id="navbarZones" class="navbar-item" href="../zones"></a>
@@ -69,8 +72,9 @@
   </nav>
 
 
-  <section id="gc-app" class="section" style="padding-top: 1em; padding-bottom: 0em; padding-left: 1.5rem; padding-right: 1.5rem!important;">
-    <div class="columns" style="margin-bottom: 0em; margin-left: 0em; padding-right: 1.5em;">       
+  <section id="gc-app" class="section"
+    style="padding-top: 1em; padding-bottom: 0em; padding-left: 1.5rem; padding-right: 1.5rem!important;">
+    <div class="columns" style="margin-bottom: 0em; margin-left: 0em; padding-right: 1.5em;">
       <div class="column is-one-fifth" style="padding-bottom: 0em; max-width: 20em;">
 
         <p class="menu-label" id="menuSearch">
@@ -78,20 +82,13 @@
         </p>
 
         <div style="margin-block-start: 0.5em; margin-block-end: 0.5em;">
-          <gc-datasource 
-           gc-widget-id="datasource1"
-           gc-layout="vertical">
+          <gc-datasource gc-widget-id="datasource1" gc-layout="vertical">
           </gc-datasource>
         </div>
 
         <div style="margin-block-start: 0.5em; margin-block-end: 0.5em;">
-          <gc-filter
-            gc-widget-id="filter1"
-            :gc-apikey="$root.gcApikey" 
-            :gc-api-base-url="$root.gcApiBaseUrl"
-            :gc-host="$root.gcHost"
-            gc-layout="vertical"
-            :gc-language="$root.language">
+          <gc-filter gc-widget-id="filter1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
+            :gc-host="$root.gcHost" gc-layout="vertical" :gc-language="$root.language">
           </gc-filter>
         </div>
 
@@ -100,20 +97,12 @@
         </p>
 
         <div v-show="analyticsActive">
-          <gc-phenology
-            gc-widget-id="phenology1" 
-            :gc-apikey="$root.gcApikey" 
-            :gc-api-base-url="$root.gcApiBaseUrl" 
-            :gc-host="$root.gcHost"
-            :gc-selected-date="$root.queryDate"
-            :gc-selected-parcel-id="$root.selectedParcelId" 
-            :gc-startdate="$root.phStartdate"
-            :gc-enddate="$root.phEnddate"
-            gc-available-options=""
-          />
+          <gc-phenology gc-widget-id="phenology1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
+            :gc-host="$root.gcHost" :gc-selected-date="$root.queryDate" :gc-selected-parcel-id="$root.selectedParcelId"
+            :gc-startdate="$root.phStartdate" :gc-enddate="$root.phEnddate" gc-available-options="" />
         </div>
 
-        </div>
+      </div>
 
       <div class="column" style="margin-bottom: 8em; overflow: auto; padding-left: 0em;">
         <h1 class="title gc-is-primary">Field Analyst</h1>
@@ -122,44 +111,36 @@
           <p class="menu-label" id="menuDetails">
             Details
           </p>
-            <div style="margin-block-start: 0.5em; margin-block-end: 0.5em; overflow: auto;">
-              <gc-parceldata 
-                gc-widget-id="parceldata1"
-                :gc-apikey="$root.gcApikey" 
-                :gc-api-base-url="$root.gcApiBaseUrl" 
-                :gc-host="$root.gcHost"
-                :gc-selected-parcel-id="$root.selectedParcelId"
-                :gc-language="$root.language"
-                gc-available-fields="parcelId,name,crop,entity,planting,harvest,area,promotion"
-                :gc-limit="$root.limit"
-                :gc-offset="$root.offset"
-                :gc-filter-string="$root.filterString"
-                :gc-parcels="$root.parcels"
-                gc-layout="horizontal">
-              </gc-parceldata>  
-            </div>
+          <div style="margin-block-start: 0.5em; margin-block-end: 0.5em; overflow: auto;">
+            <gc-parceldata gc-widget-id="parceldata1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
+              :gc-host="$root.gcHost" :gc-selected-parcel-id="$root.selectedParcelId" :gc-language="$root.language"
+              gc-available-fields="parcelId,name,crop,entity,planting,harvest,area,promotion" :gc-limit="$root.limit"
+              :gc-offset="$root.offset" :gc-filter-string="$root.filterString" :gc-parcels="$root.parcels"
+              gc-layout="horizontal">
+            </gc-parceldata>
+          </div>
 
-            <div class="tabs is-left" >
-              <ul>
-                <li :class="[(!chartActive && !mapActive)  ? 'is-active' : '']">
-                  <a v-on:click="activateSplitView(); chartActive = false; mapActive = false;">
-                    <span class="icon is-small is-orange"><i class="fas fa-columns fa-lg"></i></span>
-                    <span class="is-orange is-hidden-mobile" id="tabSplitView">  </span>
-                  </a>
-                </li>
-                <li :class="[chartActive ? 'is-active' : '']">
-                  <a v-on:click="leftColumnFull(); chartActive = !chartActive; mapActive = !chartActive">
-                    <span class="icon is-small is-orange"><i class="fas fa-chart-line fa-lg"></i></span>
-                    <span class="is-orange is-hidden-mobile" id="tabGraph">  </span>
-                  </a>
-                </li>
-                <li :class="[mapActive ? 'is-active' : '']">
-                  <a v-on:click="rightColumnFull(); mapActive = !mapActive; chartActive = !mapActive">
-                    <span class="icon is-small is-orange"><i class="fas fa-map fa-lg"></i></span>
-                    <span class="is-orange is-hidden-mobile" id="tabMap"> Map</span>
-                  </a>
-                </li>
-                <!-- <li :class="[analyticsActive ? 'is-active' : '']">
+          <div class="tabs is-left">
+            <ul>
+              <li :class="[(!chartActive && !mapActive)  ? 'is-active' : '']">
+                <a v-on:click="activateSplitView(); chartActive = false; mapActive = false;">
+                  <span class="icon is-small is-orange"><i class="fas fa-columns fa-lg"></i></span>
+                  <span class="is-orange is-hidden-mobile" id="tabSplitView"> </span>
+                </a>
+              </li>
+              <li :class="[chartActive ? 'is-active' : '']">
+                <a v-on:click="leftColumnFull(); chartActive = !chartActive; mapActive = !chartActive">
+                  <span class="icon is-small is-orange"><i class="fas fa-chart-line fa-lg"></i></span>
+                  <span class="is-orange is-hidden-mobile" id="tabGraph"> </span>
+                </a>
+              </li>
+              <li :class="[mapActive ? 'is-active' : '']">
+                <a v-on:click="rightColumnFull(); mapActive = !mapActive; chartActive = !mapActive">
+                  <span class="icon is-small is-orange"><i class="fas fa-map fa-lg"></i></span>
+                  <span class="is-orange is-hidden-mobile" id="tabMap"> Map</span>
+                </a>
+              </li>
+              <!-- <li :class="[analyticsActive ? 'is-active' : '']">
                   <a v-on:click="analyticsActive = !analyticsActive">
                     <span class="icon is-small is-orange"><i class="fas fa-flask fa-lg"></i></span>
                     <span class="is-orange is-hidden-mobile"> Analytics</span>
@@ -171,67 +152,48 @@
                     <span class="is-orange is-hidden-mobile"> Messages</span>
                   </a>
                 </li> -->
-                </ul>
+            </ul>
+          </div>
+
+          <div class="outer-split-container">
+
+            <!-- margin bottom because of tighter timeslider -->
+            <div id="leftColumn" class="split"
+              style="padding-bottom: 0em; padding: 0.5em; margin-right: 0.2em; margin-bottom: -4em;"
+              v-show="leftColumnShow">
+
+              <div>
+                <gc-chart gc-widget-id="chart1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
+                  :gc-host="$root.gcHost" :gc-selected-date="$root.queryDate"
+                  :gc-selected-product="$root.selectedProduct" :gc-current-parcel-id="$root.selectedParcelId"
+                  :gc-mode="$root.chartMode"
+                  gc-available-options="optionsTitle,graphType,hideGraphs,dateZoom,legend,modeSelector,cloudFilter"
+                  gc-available-products="ndvi,ndwi,ndre1,ndre2,cire,npcri,savi,evi2,backscatter_vv,backscatter_vh,sbmi"
+                  :gc-data-source="$root.dataSource" gc-datezoom-layout="horizontal" :gc-language="$root.language"
+                  :gc-limit="$root.limit" :gc-offset="$root.offset" :gc-filter-string="$root.filterString"
+                  gc-y-scale="dynamic" :gc-ph-startdate="$root.phStartdate" :gc-ph-enddate="$root.phEnddate" />
+              </div>
+
             </div>
-            
-            <div class="outer-split-container">
-        
-              <!-- margin bottom because of tighter timeslider -->
-              <div id="leftColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; margin-right: 0.2em; margin-bottom: -4em;" v-show="leftColumnShow">
-                
-                <div>
-                  <gc-chart 
-                      gc-widget-id="chart1" 
-                      :gc-apikey="$root.gcApikey" 
-                      :gc-api-base-url="$root.gcApiBaseUrl" 
-                      :gc-host="$root.gcHost"
-                      :gc-selected-date="$root.queryDate"
-                      :gc-selected-product="$root.selectedProduct"
-                      :gc-current-parcel-id="$root.selectedParcelId" 
-                      :gc-mode="$root.chartMode"
-                      gc-available-options="optionsTitle,graphType,hideGraphs,dateZoom,legend,modeSelector,cloudFilter"
-                      gc-available-products="ndvi,ndwi,ndre1,ndre2,cire,npcri,savi,evi2"
-                      :gc-data-source="$root.dataSource"
-                      gc-datezoom-layout="horizontal"
-                      :gc-language="$root.language"
-                      :gc-limit="$root.limit"
-                      :gc-offset="$root.offset"
-                      :gc-filter-string="$root.filterString"
-                      gc-y-scale="dynamic"
-                      :gc-ph-startdate="$root.phStartdate"
-                      :gc-ph-enddate="$root.phEnddate"
-                      />
-                  </div>
 
+            <div id="rightColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; margin-left: 0.2em;"
+              v-show="rightColumnShow">
+              <div>
+                <gc-map gc-widget-id="map1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
+                  :gc-host="$root.gcHost" gc-basemap="osm"
+                  gc-available-tools="edit,delete,query,legend,downloadImage,productSelector"
+                  gc-available-options="optionsTitle,colorMap,imageBrightness,imageTransparency"
+                  :gc-selected-product="$root.selectedProduct" :gc-current-parcel-id="$root.selectedParcelId"
+                  :gc-filter-string="$root.filterString" :gc-limit="$root.limit" :gc-offset="$root.offset"
+                  :gc-data-source="$root.dataSource" :gc-language="$root.language" :gc-selected-date="$root.queryDate"
+                  gc-image-change-interval="600" />
               </div>
-            
-              <div id="rightColumn" class="split" style="padding-bottom: 0em; padding: 0.5em; margin-left: 0.2em;" v-show="rightColumnShow">
-                <div>
-                  <gc-map 
-                      gc-widget-id="map1" 
-                      :gc-apikey="$root.gcApikey" 
-                      :gc-api-base-url="$root.gcApiBaseUrl" 
-                      :gc-host="$root.gcHost"
-                      gc-basemap="osm"
-                      gc-available-tools="edit,delete,query,legend,downloadImage,productSelector" 
-                      gc-available-options="optionsTitle,colorMap,imageBrightness,imageTransparency" 
-                      :gc-selected-product="$root.selectedProduct"
-                      :gc-current-parcel-id="$root.selectedParcelId" 
-                      :gc-filter-string="$root.filterString"    
-                      :gc-limit="$root.limit"
-                      :gc-offset="$root.offset"
-                      :gc-data-source="$root.dataSource"
-                      :gc-language="$root.language"
-                      :gc-selected-date="$root.queryDate"
-                      gc-image-change-interval="600"
-                   />
-                </div>
-              </div>
-        
-            </div> <!-- columns -->
+            </div>
+
+          </div> <!-- columns -->
 
 
-            <!-- <div class="tabs is-left" >
+          <!-- <div class="tabs is-left" >
               <ul>
                 <li :class="[timesliderActive ? 'is-active' : '']">
                   <a v-on:click="timesliderActive = !timesliderActive">
@@ -254,34 +216,22 @@
                 </ul>
             </div> -->
 
-            <p class="menu-label" id="menuUtilities">
-              Utilities
-            </p>
+          <p class="menu-label" id="menuUtilities">
+            Utilities
+          </p>
 
-            <div v-show="timesliderActive" style="margin-left: 0em; margin-right: 3em;">
-              <gc-timeslider
-                gc-widget-id="timeslider1" 
-                :gc-timeseries="$root.currentTimeseries"
-                :gc-selected-date="$root.queryDate"
-                gc-image-change-interval="400"
-                :gc-language="$root.language"
-                style="width: 100%"
-                >
-              </gc-timeslider>
-            </div>  
-            
-            <div v-show="messagesActive">
-              <gc-messages
-                gc-widget-id="messages1" 
-                :gc-apikey="$root.gcApikey" 
-                :gc-api-base-url="$root.gcApiBaseUrl" 
-                :gc-host="$root.gcHost"
-                 :gc-language="$root.language"
-                 :gc-selected-parcel-id="$root.selectedParcelId" 
-                 gc-layout="horizontal"
-                 :gc-widget-collapsed="true"
-              />
-            </div>
+          <div v-show="timesliderActive" style="margin-left: 0em; margin-right: 3em;">
+            <gc-timeslider gc-widget-id="timeslider1" :gc-timeseries="$root.currentTimeseries"
+              :gc-selected-date="$root.queryDate" gc-image-change-interval="400" :gc-language="$root.language"
+              style="width: 100%">
+            </gc-timeslider>
+          </div>
+
+          <div v-show="messagesActive">
+            <gc-messages gc-widget-id="messages1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
+              :gc-host="$root.gcHost" :gc-language="$root.language" :gc-selected-parcel-id="$root.selectedParcelId"
+              gc-layout="horizontal" :gc-widget-collapsed="true" />
+          </div>
         </div>
       </div>
     </div>
@@ -290,10 +240,14 @@
   </section> <!-- app-->
 
   <footer id="footer" class="footer is-light">
-    <div class="has-text-centered"><a href="http://www.geocledian.com">geo|cledian</a> GmbH. <span id="allRightsReserved">All rights reserved</span>.
+    <div class="has-text-centered"><a href="http://www.geocledian.com">geo|cledian</a> GmbH. <span
+        id="allRightsReserved">All rights reserved</span>.
       <p class="content"></p>
-      <p class="content">contains <a href="https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/TC_Sentinel_Data_31072014.pdf" target="_blank">Copernicus</a> data <span id="copyrightYear">2020</span><br>
-        U.S. Geological Service <a href="https://www.usgs.gov/information-policies-and-instructions/crediting-usgs" target="_blank">Landsat 8</a> used in compiling this information</p>
+      <p class="content">contains <a
+          href="https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/TC_Sentinel_Data_31072014.pdf"
+          target="_blank">Copernicus</a> data <span id="copyrightYear">2020</span><br>
+        U.S. Geological Service <a href="https://www.usgs.gov/information-policies-and-instructions/crediting-usgs"
+          target="_blank">Landsat 8</a> used in compiling this information</p>
   </footer>
 </body>
 
@@ -321,9 +275,9 @@
         "details": "Details"
       },
       "footer": {
-        "allRightsReserved" : "All rights reserved",
+        "allRightsReserved": "All rights reserved",
       },
-      "mode" : {
+      "mode": {
         "label": "Mode",
         "one_index": "one product, all statistics",
         "many_indices": "many products, means"
@@ -350,34 +304,37 @@
         "details": "Details"
       },
       "footer": {
-        "allRightsReserved" : "Alle Rechte vorbehalten",
+        "allRightsReserved": "Alle Rechte vorbehalten",
       },
-      "mode" : {
-          "label": "Modus",
-          "one_index": "ein Produkt, alle Statistikwerte",
-          "many_indices": "mehrere Produkte, Mittelwerte"
+      "mode": {
+        "label": "Modus",
+        "one_index": "ein Produkt, alle Statistikwerte",
+        "many_indices": "mehrere Produkte, Mittelwerte"
       }
     }
   };
+
   function activateSplitView() {
     vmRoot.leftColumnShow = true;
     vmRoot.rightColumnShow = true;
-    vmRoot.containerSplitSize = [62,38];
+    vmRoot.containerSplitSize = [62, 38];
   }
+
   function leftColumnFull() {
     // catch wrong resize of chart lib of 100% width is reached
     if (vmRoot.containerSplitSize[0] !== 100 && vmRoot.containerSplitSize[1] !== 0) {
       vmRoot.rightColumnShow = false;
       vmRoot.leftColumnShow = true;
-      vmRoot.containerSplitSize = [100,0];
+      vmRoot.containerSplitSize = [100, 0];
     }
   }
+
   function rightColumnFull() {
     // catch wrong resize of chart lib of 100% width is reached
     if (vmRoot.containerSplitSize[0] !== 0 && vmRoot.containerSplitSize[1] !== 100) {
       vmRoot.leftColumnShow = false;
       vmRoot.rightColumnShow = true;
-      vmRoot.containerSplitSize = [0,100];
+      vmRoot.containerSplitSize = [0, 100];
     }
   }
 </script>
