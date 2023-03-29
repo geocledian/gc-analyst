@@ -67,6 +67,7 @@
         <a id="navbarDataValidation" class="navbar-item" href="../validation"></a>
         <a class="navbar-item is-pulled-right" onclick="vmRoot.$root.language = 'de'">DE</a>
         <a class="navbar-item is-pulled-right" onclick="vmRoot.$root.language = 'en'">EN</a>
+        <a class="navbar-item is-pulled-right" onclick="vmRoot.$root.language = 'lt'">LT</a>
       </div>
     </div>
   </nav>
@@ -81,18 +82,23 @@
           Search & Filters
         </p>
 
+        <p style="padding-block-start: 0.5em;"></p>
+
         <div style="margin-block-start: 0.5em; margin-block-end: 0.5em;">
-          <gc-datasource gc-widget-id="datasource1" gc-layout="vertical">
+          <gc-datasource gc-widget-id="datasource1" gc-layout="vertical" :gc-language="$root.language">
           </gc-datasource>
         </div>
 
+        <p style="padding-block-start: 0.5em;"></p>
+
         <div style="margin-block-start: 0.5em; margin-block-end: 0.5em;">
           <gc-filter gc-widget-id="filter1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
-            :gc-host="$root.gcHost" gc-layout="vertical" :gc-language="$root.language">
+            gc-available-fields="parcelId,name,crop,entity" :gc-host="$root.gcHost" gc-layout="vertical"
+            :gc-language="$root.language">
           </gc-filter>
         </div>
 
-        <p class="menu-label" id="menuAnalytics">
+        <!-- <p class="menu-label" id="menuAnalytics">
           Analytics
         </p>
 
@@ -100,7 +106,7 @@
           <gc-phenology gc-widget-id="phenology1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
             :gc-host="$root.gcHost" :gc-selected-date="$root.queryDate" :gc-selected-parcel-id="$root.selectedParcelId"
             :gc-startdate="$root.phStartdate" :gc-enddate="$root.phEnddate" gc-available-options="" />
-        </div>
+        </div> !-->
 
       </div>
 
@@ -114,7 +120,7 @@
           <div style="margin-block-start: 0.5em; margin-block-end: 0.5em; overflow: auto;">
             <gc-parceldata gc-widget-id="parceldata1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
               :gc-host="$root.gcHost" :gc-selected-parcel-id="$root.selectedParcelId" :gc-language="$root.language"
-              gc-available-fields="parcelId,name,crop,entity,planting,harvest,area,promotion" :gc-limit="$root.limit"
+              gc-available-fields="parcelId,name,crop,entity,planting,harvest,area" :gc-limit="$root.limit"
               :gc-offset="$root.offset" :gc-filter-string="$root.filterString" :gc-parcels="$root.parcels"
               gc-layout="horizontal">
             </gc-parceldata>
@@ -168,10 +174,10 @@
                   :gc-selected-product="$root.selectedProduct" :gc-current-parcel-id="$root.selectedParcelId"
                   :gc-mode="$root.chartMode"
                   gc-available-options="optionsTitle,graphType,hideGraphs,dateZoom,legend,modeSelector,cloudFilter"
-                  gc-available-products="ndvi,ndwi,ndre1,ndre2,cire,npcri,savi,evi2,backscatter_vv,backscatter_vh,sbmi"
-                  :gc-data-source="$root.dataSource" gc-datezoom-layout="horizontal" :gc-language="$root.language"
-                  :gc-limit="$root.limit" :gc-offset="$root.offset" :gc-filter-string="$root.filterString"
-                  gc-y-scale="dynamic" :gc-ph-startdate="$root.phStartdate" :gc-ph-enddate="$root.phEnddate" />
+                  gc-available-products="ndvi,ndwi,ndre1,ndre2,cire,npcri,savi,evi2" :gc-data-source="$root.dataSource"
+                  gc-datezoom-layout="horizontal" :gc-language="$root.language" :gc-limit="$root.limit"
+                  :gc-offset="$root.offset" :gc-filter-string="$root.filterString" gc-y-scale="dynamic"
+                  :gc-ph-startdate="$root.phStartdate" :gc-ph-enddate="$root.phEnddate" />
               </div>
 
             </div>
@@ -181,8 +187,10 @@
               <div>
                 <gc-map gc-widget-id="map1" :gc-apikey="$root.gcApikey" :gc-api-base-url="$root.gcApiBaseUrl"
                   :gc-host="$root.gcHost" gc-basemap="osm"
-                  gc-available-tools="edit,delete,query,legend,downloadImage,productSelector"
+                  gc-available-tools="edit,query,legend,downloadImage,productSelector"
                   gc-available-options="optionsTitle,colorMap,imageBrightness,imageTransparency"
+                  gc-available-fields="apikey,crop,entity,planting,harvest"
+                  gc-available-products="visible,vitality,variations,ndvi,ndwi,ndre1,ndre2,cire,npcri,savi,evi2"
                   :gc-selected-product="$root.selectedProduct" :gc-current-parcel-id="$root.selectedParcelId"
                   :gc-filter-string="$root.filterString" :gc-limit="$root.limit" :gc-offset="$root.offset"
                   :gc-data-source="$root.dataSource" :gc-language="$root.language" :gc-selected-date="$root.queryDate"
@@ -311,7 +319,36 @@
         "one_index": "ein Produkt, alle Statistikwerte",
         "many_indices": "mehrere Produkte, Mittelwerte"
       }
-    }
+    },
+    "lt": {
+      "navbar": {
+        "productOverview": "Product Overview",
+        "cropPerformance": "Crop Performance Dashboard",
+        "portfolio": "Portfolio Dashboard",
+        "validation": "Data Validation Dashboard",
+        "zones": "Zones Dashboard",
+        "harvest": "Harvest Dashboard",
+        "about": "About us"
+      },
+      "headings": {
+        "graph": "Grafikas",
+        "list": "Atributai",
+        "map": "Žemėlapis",
+        "filter": "Paieška ir filtrai",
+        "splitview": "Padalytas vaizdas",
+        "utilities": "Komunalinės paslaugos",
+        "analytics": "Duomenų Analizė",
+        "details": "Išsami informacija"
+      },
+      "footer": {
+        "allRightsReserved": "All rights reserved",
+      },
+      "mode": {
+        "label": "Mode",
+        "one_index": "one product, all statistics",
+        "many_indices": "many products, means"
+      }
+    },
   };
 
   function activateSplitView() {
