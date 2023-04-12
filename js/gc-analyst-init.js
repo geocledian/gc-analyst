@@ -380,11 +380,11 @@ function initComponent() {
         try {
           document.getElementById("navbarProductOverview").innerHTML = i18n.t("indexLocales.navbar.productOverview")
           document.getElementById("navbarAboutUs").innerHTML = i18n.t("indexLocales.navbar.about");
-          document.getElementById("navbarCropPerformance").innerHTML = i18n.t("indexLocales.navbar.cropPerformance");
-          document.getElementById("navbarDataValidation").innerHTML = i18n.t("indexLocales.navbar.validation");
-          document.getElementById("navbarPortfolio").innerHTML = i18n.t("indexLocales.navbar.portfolio");
-          document.getElementById("navbarZones").innerHTML = i18n.t("indexLocales.navbar.zones");
-          document.getElementById("navbarHarvest").innerHTML = i18n.t("indexLocales.navbar.harvest");
+          // document.getElementById("navbarCropPerformance").innerHTML = i18n.t("indexLocales.navbar.cropPerformance");
+          // document.getElementById("navbarDataValidation").innerHTML = i18n.t("indexLocales.navbar.validation");
+          // document.getElementById("navbarPortfolio").innerHTML = i18n.t("indexLocales.navbar.portfolio");
+          // document.getElementById("navbarZones").innerHTML = i18n.t("indexLocales.navbar.zones");
+          // document.getElementById("navbarHarvest").innerHTML = i18n.t("indexLocales.navbar.harvest");
           document.getElementById("allRightsReserved").innerHTML = i18n.t("indexLocales.footer.allRightsReserved");
           document.getElementById("tabSplitView").innerHTML = i18n.t("indexLocales.headings.splitview");
           document.getElementById("tabGraph").innerHTML = i18n.t("indexLocales.headings.graph");
