@@ -221,6 +221,7 @@ function initComponent() {
       this.$on('phEnddateChange', this.phEnddateChange);
       this.$on('getPhenology', this.getPhenology);
       this.$on('resetPhenology', this.resetPhenology);
+      this.$on('newParcelAdded', this.newParcelAdded);
 
       this.containerSplitSize = [65, 35];
 
@@ -408,6 +409,17 @@ function initComponent() {
         document.getElementById("navbarZones").href += "?" + queryParams;
         document.getElementById("navbarHarvest").href += "?" + queryParams;
 
+      },
+      async newParcelAdded(newParcelId) {
+        for (var i = 0; i < this.$children.length; i++) {
+          if (this.$children[i].gcWidgetId.includes("parceldata")) {
+
+            await this.$children[i].getParcelTotalCount(this.filterString)
+              .then(this.$children[i].setPaginationEnd())
+              .then(this.selectedParcelId = newParcelId);
+
+          }
+        }
       }
     }
   });
